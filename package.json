@@ -1,0 +1,56 @@
+{
+  "name": "tauri-app",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "lint": "lint",
+    "check": "taze major -r",
+    "tup": "taze major -r -I",
+    "postinstall": "npx simple-git-hooks"
+  },
+  "dependencies": {
+    "@radix-icons/vue": "^1.0.0",
+    "@tauri-apps/api": "^1.5.6",
+    "@vueuse/core": "^10.10.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "radix-vue": "^1.8.3",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "vue": "^3.4.27"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.20.0",
+    "@iconify-json/radix-icons": "^1.1.14",
+    "@iconify/vue": "^4.1.2",
+    "@tauri-apps/cli": "^1.5.14",
+    "@types/node": "^20.14.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue-macros/volar": "^0.21.1",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9.4.0",
+    "eslint-plugin-format": "^0.1.1",
+    "lint-staged": "^15.2.5",
+    "postcss": "^8.4.38",
+    "simple-git-hooks": "^2.11.1",
+    "tailwindcss": "^3.4.3",
+    "taze": "^0.13.8",
+    "typescript": "^5.4.5",
+    "unplugin-auto-import": "^0.17.6",
+    "unplugin-vue-components": "^0.27.0",
+    "unplugin-vue-macros": "^2.9.3",
+    "vite": "^5.2.12",
+    "vue-tsc": "^2.0.19"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint"
+  }
+}
