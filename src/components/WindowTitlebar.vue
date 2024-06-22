@@ -4,14 +4,14 @@ import { Icon } from '@iconify/vue'
 </script>
 
 <template>
-  <div data-tauri-drag-region class="titlebar">
-    <Button variant="outline" size="icon" @click="appWindow.minimize()">
+  <div class="flex items-center gap-2">
+    <Button variant="ghost" size="icon" @click="appWindow.minimize()">
       <Icon icon="mdi:window-minimize" />
     </Button>
-    <Button variant="outline" size="icon" @click="appWindow.toggleMaximize()">
+    <Button variant="ghost" size="icon" @click="appWindow.toggleMaximize()">
       <Icon icon="mdi:window-maximize" />
     </Button>
-    <Button variant="outline" size="icon" @click="appWindow.close()">
+    <Button variant="ghost" size="icon" @click="appWindow.close()">
       <Icon icon="mdi:close" />
     </Button>
   </div>

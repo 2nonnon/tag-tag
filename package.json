@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "tauri": "tauri",
+    "tr": "tauri",
     "lint": "lint",
     "check": "taze major -r",
     "tup": "taze major -r -I",
