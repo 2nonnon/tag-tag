@@ -32,9 +32,6 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.3)
-      tauri-app:
-        specifier: 'link:'
-        version: 'link:'
       vue:
         specifier: ^3.4.27
         version: 3.4.27(typescript@5.4.5)
@@ -54,6 +51,9 @@ importers:
       '@types/node':
         specifier: ^20.14.0
         version: 20.14.0
+      '@types/wicg-file-system-access':
+        specifier: ^2023.10.5
+        version: 2023.10.5
       '@vitejs/plugin-vue':
         specifier: ^5.0.5
         version: 5.0.5(vite@5.2.12(@types/node@20.14.0))(vue@3.4.27(typescript@5.4.5))
@@ -704,6 +704,9 @@ packages:
 
   '@types/web-bluetooth@0.0.20':
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
+
+  '@types/wicg-file-system-access@2023.10.5':
+    resolution: {integrity: sha512-e9kZO9kCdLqT2h9Tw38oGv9UNzBBWaR1MzuAavxPcsV/7FJ3tWbU6RI3uB+yKIDPGLkGVbplS52ub0AcRLvrhA==}
 
   '@typescript-eslint/eslint-plugin@7.11.0':
     resolution: {integrity: sha512-P+qEahbgeHW4JQ/87FuItjBj8O3MYv5gELDzr8QaQ7fsll1gSMTYb6j87MYyxwf3DtD7uGFB9ShwgmCJB5KmaQ==}
@@ -3155,6 +3158,8 @@ snapshots:
   '@types/unist@2.0.10': {}
 
   '@types/web-bluetooth@0.0.20': {}
+
+  '@types/wicg-file-system-access@2023.10.5': {}
 
   '@typescript-eslint/eslint-plugin@7.11.0(@typescript-eslint/parser@7.11.0(eslint@9.4.0)(typescript@5.4.5))(eslint@9.4.0)(typescript@5.4.5)':
     dependencies:

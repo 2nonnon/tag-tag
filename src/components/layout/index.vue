@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { appWindow } from '@tauri-apps/api/window'
-import { Icon } from '@iconify/vue'
+
 </script>
 
 <template>
