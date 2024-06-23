@@ -6,7 +6,7 @@
   <div data-tauri-drag-region class="flex justify-between items-center px-6 py-2">
     <div>TagTag</div>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center">
       <ColorModeToggle />
       <WindowTitlebar />
     </div>

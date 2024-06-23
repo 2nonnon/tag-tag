@@ -1,57 +1,28 @@
 <script setup lang="ts">
-import { open } from '@tauri-apps/api/dialog'
-import { readDir } from '@tauri-apps/api/fs'
-import { convertFileSrc } from '@tauri-apps/api/tauri'
+import type { GlobalThemeOverrides } from 'naive-ui'
+import { darkTheme, dateZhCN, zhCN } from 'naive-ui'
+import { isDark } from '@/composables/dark'
 
-const workDir = useStorage('WorkDir', '')
+const getTheme = computed(() => (isDark.value ? darkTheme : undefined))
 
-const images = ref<Array<string>>([])
+const getThemeOverrides: GlobalThemeOverrides = {
 
-async function hnadleChooeseFloder() {
-  const selected = await open({
-    directory: true,
-    multiple: false,
-  }) as string | null
-  if (selected) {
-    workDir.value = selected
-    const res = await getAllFilesInDir(selected)
-
-    images.value = res.map(item => item.url)
-  }
-  else {
-    console.log('你也没选啊')
-  }
-}
-
-async function getAllFilesInDir(dir: string) {
-  const entries = await readDir(dir, { recursive: false })
-
-  const res = await Promise.all(
-    entries.map(async (entry) => {
-      const url = convertFileSrc(`${entry.path}`)
-
-      return { ...entry, url }
-    }),
-  )
-
-  return res
 }
 </script>
 
 <template>
-  <Layout>
-    <div class="container">
-      {{ workDir }}
-    </div>
-
-    <Button @click="hnadleChooeseFloder">
-      选择文件夹
-    </Button>
-
-    <div v-for="(img, index) in images" :key="index">
-      <img :src="img">
-    </div>
-  </Layout>
+  <n-config-provider :theme="getTheme" :locale="zhCN" :date-locale="dateZhCN" :theme-overrides="getThemeOverrides" inline-theme-disabled>
+    <Application>
+      <RouterView>
+        <template #default="{ Component, route }">
+          <Transition>
+            <KeepAlive>
+              <component :is="Component" :key="route.fullPath" />
+            </KeepAlive>
+          </Transition>
+        </template>
+      </RouterView>
+    </Application>
+    <n-global-style />
+  </n-config-provider>
 </template>
-
-<style scoped></style>

@@ -19,10 +19,12 @@
     "@vueuse/core": "^10.10.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "pinia": "^2.1.7",
     "radix-vue": "^1.8.3",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "vue": "^3.4.27"
+    "vue": "^3.4.27",
+    "vue-router": "^4.4.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.20.0",
@@ -37,6 +39,7 @@
     "eslint": "^9.4.0",
     "eslint-plugin-format": "^0.1.1",
     "lint-staged": "^15.2.5",
+    "naive-ui": "^2.38.2",
     "postcss": "^8.4.38",
     "simple-git-hooks": "^2.11.1",
     "tailwindcss": "^3.4.3",

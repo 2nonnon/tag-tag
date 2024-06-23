@@ -4,15 +4,23 @@ import { Icon } from '@iconify/vue'
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
-    <Button variant="ghost" size="icon" @click="appWindow.minimize()">
-      <Icon icon="mdi:window-minimize" />
-    </Button>
-    <Button variant="ghost" size="icon" @click="appWindow.toggleMaximize()">
-      <Icon icon="mdi:window-maximize" />
-    </Button>
-    <Button variant="ghost" size="icon" @click="appWindow.close()">
-      <Icon icon="mdi:close" />
-    </Button>
+  <div class="flex items-center">
+    <n-button quaternary type="primary" @click="appWindow.minimize()">
+      <template #icon>
+        <Icon icon="mdi:window-minimize" />
+      </template>
+    </n-button>
+
+    <n-button quaternary type="primary" @click="appWindow.toggleMaximize()">
+      <template #icon>
+        <Icon icon="mdi:window-maximize" />
+      </template>
+    </n-button>
+
+    <n-button quaternary type="primary" @click="appWindow.close()">
+      <template #icon>
+        <Icon icon="mdi:close" />
+      </template>
+    </n-button>
   </div>
 </template>
