@@ -41,7 +41,7 @@ export function createEditDrawer<T, D extends FormValue = FormValue>({
     content() {
       return h(NFlex, { vertical: true }, () => [
         typeof beforeFormContent === 'function' ? beforeFormContent() : beforeFormContent,
-        h(BasicFormWithType, { 'ref': formRef, 'items': formItems, defaultValue, 'onUpdate:value': handleUpdateValue }),
+        h(BasicFormWithType, { 'ref': formRef, 'items': formItems, defaultValue, 'onUpdate:value': handleUpdateValue as any }),
         typeof afterFormContent === 'function' ? afterFormContent() : afterFormContent,
       ])
     },

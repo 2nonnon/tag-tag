@@ -15,7 +15,7 @@ const { hasWorkDir } = storeToRefs(dataStore)
     <n-layout-header bordered>
       <Header />
     </n-layout-header>
-    <n-layout-content class="flex-1" :native-scrollbar="false">
+    <n-layout-content class="flex-1" :native-scrollbar="true">
       <main>
         <slot />
       </main>
