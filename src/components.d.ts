@@ -27,6 +27,7 @@ declare module 'vue' {
     DropdownMenuSubContent: typeof import('./components/ui/dropdown-menu/DropdownMenuSubContent.vue')['default']
     DropdownMenuSubTrigger: typeof import('./components/ui/dropdown-menu/DropdownMenuSubTrigger.vue')['default']
     DropdownMenuTrigger: typeof import('./components/ui/dropdown-menu/DropdownMenuTrigger.vue')['default']
+    FileCard: typeof import('./components/file-card.vue')['default']
     Greet: typeof import('./components/Greet.vue')['default']
     Header: typeof import('./components/layout/header.vue')['default']
     ImagePreview: typeof import('./components/image-preview/index.vue')['default']
