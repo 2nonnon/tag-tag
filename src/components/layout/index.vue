@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { storeToRefs } from 'pinia'
 import { useDataStore } from '@/store/data'
 

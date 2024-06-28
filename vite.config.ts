@@ -41,6 +41,7 @@ export default defineConfig(async () => ({
             'useNotification',
             'useLoadingBar',
           ],
+          'lucide-vue-next': [],
         },
       ],
       dts: './src/auto-imports.d.ts',
