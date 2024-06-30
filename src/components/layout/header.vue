@@ -3,11 +3,10 @@
 </script>
 
 <template>
-  <div data-tauri-drag-region class="flex justify-between items-center px-6 py-2">
+  <div data-tauri-drag-region class="flex justify-between items-center px-8 py-4">
     <div>TagTag</div>
 
     <div class="flex items-center">
-      <ColorModeToggle />
       <WindowTitlebar />
     </div>
   </div>

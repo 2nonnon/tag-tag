@@ -17,7 +17,7 @@ onMounted(() => {
 
 <template>
   <Layout>
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4 p-6">
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(144px,1fr))] gap-x-6 gap-y-8 px-10 py-8">
       <file-card v-for="item in files" :key="item.path" :name="item.name" :src="item.url" />
     </div>
   </Layout>

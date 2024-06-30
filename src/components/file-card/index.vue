@@ -73,7 +73,7 @@ const { stop } = useIntersectionObserver(
 
 <template>
   <div ref="targetRef">
-    <div class="w-full aspect-square overflow-hidden rounded-md mb-2">
+    <div class="w-full aspect-square overflow-hidden rounded-md mb-2 hover:scale-[1.05] transition-transform duration-300">
       <div v-if="loading" class="w-full h-full flex justify-center items-center">
         加载中...
       </div>
@@ -82,7 +82,7 @@ const { stop } = useIntersectionObserver(
       </div>
       <img v-else class="h-full w-full object-cover" :src="$src" :alt="name">
     </div>
-    <div class="text-ellipsis overflow-hidden font-bold">
+    <div class="text-ellipsis font-bold line-clamp-2">
       {{ name }}
     </div>
   </div>

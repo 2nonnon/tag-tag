@@ -53,10 +53,14 @@
     },
     "windows": [
       {
-        "title": "tauri-app",
-        "width": 800,
-        "height": 600,
-        "decorations": false
+        "title": "tag-tag",
+        "width": 1080,
+        "height": 656,
+        "decorations": false,
+        "minWidth": 800,
+        "minHeight": 600,
+        "center": true,
+        "transparent": true
       }
     ],
     "security": {

@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Application: typeof import('./components/application/index.vue')['default']
+    Aside: typeof import('./components/layout/aside.vue')['default']
     BasicForm: typeof import('./components/basic-form/index.vue')['default']
     Button: typeof import('./components/ui/button/Button.vue')['default']
     ColorModeToggle: typeof import('./components/ColorModeToggle.vue')['default']
@@ -44,6 +45,7 @@ declare module 'vue' {
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
+    NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NLoadingBarProvider: typeof import('naive-ui')['NLoadingBarProvider']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NNotificationProvider: typeof import('naive-ui')['NNotificationProvider']
