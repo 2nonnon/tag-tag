@@ -4,23 +4,23 @@ import { Maximize, Minus, X } from 'lucide-vue-next'
 </script>
 
 <template>
-  <div class="flex items-center">
-    <n-button quaternary type="primary" @click="appWindow.minimize()">
-      <template #icon>
+  <div class="flex items-center gap-3">
+    <n-button class="w-8 h-8 p-0" quaternary @click="appWindow.minimize()">
+      <n-icon>
         <Minus />
-      </template>
+      </n-icon>
     </n-button>
 
-    <n-button quaternary type="primary" @click="appWindow.toggleMaximize()">
-      <template #icon>
+    <n-button class="w-8 h-8 p-0" quaternary @click="appWindow.toggleMaximize()">
+      <n-icon>
         <Maximize />
-      </template>
+      </n-icon>
     </n-button>
 
-    <n-button quaternary type="primary" @click="appWindow.close()">
-      <template #icon>
+    <n-button class="w-8 h-8 p-0" quaternary @click="appWindow.close()">
+      <n-icon>
         <X />
-      </template>
+      </n-icon>
     </n-button>
   </div>
 </template>

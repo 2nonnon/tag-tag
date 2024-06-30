@@ -11,10 +11,10 @@ const { hasWorkDir } = storeToRefs(dataStore)
 </script>
 
 <template>
-  <div class="rounded-lg overflow-hidden border border-gray-100 dark:border-zinc-500 flex absolute inset-0">
+  <n-el class="rounded-lg overflow-hidden border border-[--tag-color] flex absolute inset-0">
     <Aside />
 
-    <n-layout content-class="h-full flex flex-col" embedded>
+    <n-layout content-class="h-full flex flex-col">
       <n-layout-header bordered>
         <Header />
       </n-layout-header>
@@ -24,25 +24,25 @@ const { hasWorkDir } = storeToRefs(dataStore)
           <slot />
         </main>
 
-        <n-back-top :bottom="160" :right="20" :visibility-height="0">
+        <n-back-top :bottom="144" :right="20" :visibility-height="0">
           <div class="absolute inset-0 z-1 flex justify-center items-center" @click.stop="chooseDir()">
-            <n-icon class="n-base-icon">
-              <Pencil v-if="hasWorkDir" icon="iconamoon:edit" />
+            <n-icon>
+              <Pencil v-if="hasWorkDir" />
               <Plus v-else />
             </n-icon>
           </div>
         </n-back-top>
 
-        <n-back-top :bottom="100" :right="20" :visibility-height="0">
+        <n-back-top :bottom="88" :right="20" :visibility-height="0">
           <div class="absolute inset-0 z-1 flex justify-center items-center" @click.stop="updateFiles()">
-            <n-icon class="n-base-icon">
+            <n-icon>
               <RotateCw />
             </n-icon>
           </div>
         </n-back-top>
 
-        <n-back-top :right="20" :visibility-height="160" />
+        <n-back-top :bottom="32" :right="20" :visibility-height="160" />
       </n-layout-content>
     </n-layout>
-  </div>
+  </n-el>
 </template>

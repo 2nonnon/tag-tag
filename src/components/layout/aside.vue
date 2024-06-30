@@ -3,27 +3,27 @@ import { ChevronLeft, Settings } from 'lucide-vue-next'
 </script>
 
 <template>
-  <aside class="w-16 flex-shrink-0 flex-grow-0 bg-gray-100 dark:bg-zinc-500">
-    <div class="flex flex-col justify-between items-center h-full py-4">
-      <div class="flex flex-col gap-2">
-        <n-button quaternary type="primary">
-          <template #icon>
+  <n-el tag="aside" class="w-16 flex-shrink-0 flex-grow-0 bg-[--tag-color]">
+    <div class="flex flex-col justify-between items-center h-full py-8">
+      <div class="flex flex-col gap-6">
+        <n-button text>
+          <n-icon>
             <ChevronLeft />
-          </template>
+          </n-icon>
         </n-button>
       </div>
 
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-6">
         <ColorModeToggle />
 
-        <n-button quaternary type="primary">
-          <template #icon>
+        <n-button text>
+          <n-icon>
             <Settings />
-          </template>
+          </n-icon>
         </n-button>
       </div>
     </div>
-  </aside>
+  </n-el>
 </template>
 
 <style scoped></style>
