@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { appWindow } from '@tauri-apps/api/window'
-import { Maximize, Minus, X } from 'lucide-vue-next'
+import { Minus, X } from 'lucide-vue-next'
+
+const isMaximized = ref(false)
+
+async function toggleMaximize() {
+  await appWindow.toggleMaximize()
+  isMaximized.value = await appWindow.isMaximized()
+}
 </script>
 
 <template>
@@ -11,9 +18,12 @@ import { Maximize, Minus, X } from 'lucide-vue-next'
       </n-icon>
     </n-button>
 
-    <n-button class="w-8 h-8 p-0" quaternary @click="appWindow.toggleMaximize()">
-      <n-icon>
-        <Maximize />
+    <n-button class="w-8 h-8 p-0" quaternary @click="toggleMaximize">
+      <n-icon v-if="isMaximized">
+        <Stack />
+      </n-icon>
+      <n-icon v-else>
+        <Square />
       </n-icon>
     </n-button>
 

@@ -33,7 +33,7 @@ declare module 'vue' {
     Header: typeof import('./components/layout/header.vue')['default']
     ImagePreview: typeof import('./components/image-preview/index.vue')['default']
     Layout: typeof import('./components/layout/index.vue')['default']
-    Logo: typeof import('./components/Logo.vue')['default']
+    Logo: typeof import('./components/icon/Logo.vue')['default']
     NBackTop: typeof import('naive-ui')['NBackTop']
     NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
@@ -47,12 +47,13 @@ declare module 'vue' {
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
-    NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NLoadingBarProvider: typeof import('naive-ui')['NLoadingBarProvider']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NNotificationProvider: typeof import('naive-ui')['NNotificationProvider']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Square: typeof import('./components/icon/Square.vue')['default']
+    Stack: typeof import('./components/icon/Stack.vue')['default']
     WindowTitlebar: typeof import('./components/WindowTitlebar.vue')['default']
   }
 }
