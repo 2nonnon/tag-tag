@@ -7,10 +7,10 @@ const getTheme = computed(() => (isDark.value ? darkTheme : undefined))
 
 const getThemeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: 'hsl(var(--primary))',
-    primaryColorHover: 'hsl(var(--primary))',
-    primaryColorPressed: 'hsl(var(--primary))',
-    primaryColorSuppl: 'hsl(var(--primary))',
+    // primaryColor: 'hsl(var(--primary))',
+    // primaryColorHover: 'hsl(var(--primary))',
+    // primaryColorPressed: 'hsl(var(--primary))',
+    // primaryColorSuppl: 'hsl(var(--primary))',
   },
 }
 </script>
