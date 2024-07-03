@@ -2,16 +2,19 @@
 import { storeToRefs } from 'pinia'
 import { Pencil, Plus, RotateCw } from 'lucide-vue-next'
 import { useDataStore } from '@/store/data'
+import { useStateStore } from '@/store/state'
 
 const dataStore = useDataStore()
 
 const { updateFiles, chooseDir } = dataStore
 
 const { hasWorkDir } = storeToRefs(dataStore)
+
+const { isMaximized } = storeToRefs(useStateStore())
 </script>
 
 <template>
-  <n-el class="rounded-lg overflow-hidden border border-[--tag-color] flex absolute inset-0">
+  <n-el class="overflow-hidden border border-[--tag-color] flex absolute inset-0" :class="{ 'rounded-lg': !isMaximized }">
     <Aside />
 
     <n-layout content-class="h-full flex flex-col">

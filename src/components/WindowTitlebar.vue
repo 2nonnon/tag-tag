@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { appWindow } from '@tauri-apps/api/window'
 import { Minus, X } from 'lucide-vue-next'
+import { storeToRefs } from 'pinia'
+import { useStateStore } from '@/store/state'
 
-const isMaximized = ref(false)
+const stateStore = useStateStore()
+
+const { isMaximized } = storeToRefs(stateStore)
+
+const { setIsMaximized } = stateStore
 
 async function toggleMaximize() {
   await appWindow.toggleMaximize()
-  isMaximized.value = await appWindow.isMaximized()
+  setIsMaximized(await appWindow.isMaximized())
 }
 </script>
 
