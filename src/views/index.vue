@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useDataStore } from '@/store/data'
+import FileCard from '@/components/file-card/FileCard.vue'
 
 const dataStore = useDataStore()
 
@@ -36,6 +37,43 @@ onMounted(() => {
     updateFiles()
   }
 })
+
+const options = [
+  {
+    label: '重命名',
+    key: 'rename',
+  },
+  {
+    label: '查看详情',
+    key: 'detail',
+  },
+]
+
+const message = useMessage()
+
+const showDropdown = ref(false)
+const x = ref(0)
+const y = ref(0)
+
+function handleSelect(key: string | number) {
+  showDropdown.value = false
+  message.info(String(key))
+}
+
+function handleContextMenu(e: MouseEvent) {
+  e.preventDefault()
+  showDropdown.value = false
+  nextTick().then(() => {
+    showDropdown.value = true
+    x.value = e.clientX
+    y.value = e.clientY
+  })
+}
+
+function onClickoutside() {
+  message.info('clickoutside')
+  showDropdown.value = false
+}
 </script>
 
 <template>
@@ -48,10 +86,23 @@ onMounted(() => {
       </div>
     </div>
     <div class="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-x-6 gap-y-8 px-10 pt-4 pb-8">
-      <div v-for="item in files" :key="item.path" class="p-2 rounded-xl transition hover:bg-accent" :class="{ '!bg-accent-foreground': checkedFiles.includes(item.path) }" @click="handleCheckFile(item.path)">
-        <file-card :name="item.name" :src="item.url" />
-      </div>
+      <FileCard v-for="item in files" :key="item.path" :name="item.name" :src="item.url" :checked="checkedFiles.includes(item.path)" @click="handleCheckFile(item.path)" @contextmenu="handleContextMenu">
+        <FileContent :name="item.name" :src="item.url" />
+      </FileCard>
     </div>
+
+    <div v-if="showDropdown" class="absolute inset-0 z-0" />
+
+    <n-dropdown
+      placement="bottom-start"
+      trigger="manual"
+      :x="x"
+      :y="y"
+      :options="options"
+      :show="showDropdown"
+      :on-clickoutside="onClickoutside"
+      @select="handleSelect"
+    />
   </Layout>
 </template>
 

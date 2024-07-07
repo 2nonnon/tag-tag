@@ -13,6 +13,12 @@ const getThemeOverrides: GlobalThemeOverrides = {
     // primaryColorSuppl: 'hsl(var(--primary))',
   },
 }
+
+onMounted(() => {
+  document.documentElement.addEventListener('contextmenu', (e) => {
+    e.preventDefault()
+  })
+})
 </script>
 
 <template>
