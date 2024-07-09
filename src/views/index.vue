@@ -49,15 +49,12 @@ const options = [
   },
 ]
 
-const message = useMessage()
-
 const showDropdown = ref(false)
 const x = ref(0)
 const y = ref(0)
 
-function handleSelect(key: string | number) {
+function handleSelect(_key: string) {
   showDropdown.value = false
-  message.info(String(key))
 }
 
 function handleContextMenu(e: MouseEvent) {
@@ -71,7 +68,6 @@ function handleContextMenu(e: MouseEvent) {
 }
 
 function onClickoutside() {
-  message.info('clickoutside')
   showDropdown.value = false
 }
 </script>
@@ -86,8 +82,10 @@ function onClickoutside() {
       </div>
     </div>
     <div class="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-x-6 gap-y-8 px-10 pt-4 pb-8">
-      <FileCard v-for="item in files" :key="item.path" :name="item.name" :src="item.url" :checked="checkedFiles.includes(item.path)" @click="handleCheckFile(item.path)" @contextmenu="handleContextMenu">
-        <FileContent :name="item.name" :src="item.url" />
+      <FileCard v-for="item in files" :key="item.path" :name="item.name!" :src="item.url" :checked="checkedFiles.includes(item.path)" @click="handleCheckFile(item.path)" @contextmenu="handleContextMenu">
+        <template #default="{ loading, error, info }">
+          <FileContent :name="item.name!" :src="info?.src" :loading="loading" :error="error" />
+        </template>
       </FileCard>
     </div>
 
