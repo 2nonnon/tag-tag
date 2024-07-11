@@ -28,6 +28,7 @@ const popInfo = computed(() => {
     return null
 
   return {
+    name: info.value.name,
     type: parseType(info.value.type),
     size: parseSize(info.value.size),
     width: info.value.width,
@@ -71,20 +72,23 @@ const { stop } = useIntersectionObserver(
 </script>
 
 <template>
-  <n-popover trigger="hover" :disabled="!popInfo" :delay="1000">
-    <template #trigger>
-      <div ref="targetRef" class="p-2 rounded-xl transition hover:bg-accent" :class="{ '!bg-accent-foreground': checked }">
-        <slot :loading="loading" :error="error" :info="info" />
-      </div>
-    </template>
+  <div>
+    <n-popover trigger="hover" :disabled="!popInfo" :delay="1000">
+      <template #trigger>
+        <div ref="targetRef" class="p-2 rounded-xl transition hover:bg-accent" :class="{ '!bg-accent-foreground': checked }">
+          <slot :loading="loading" :error="error" :info="info" />
+        </div>
+      </template>
 
-    <div>
-      <div>项目类型：{{ popInfo?.type }}</div>
-      <div>分辨率：{{ popInfo?.width }} × {{ popInfo?.height }}</div>
-      <div>大小：{{ popInfo?.size }}</div>
-      <div>修改时间：{{ popInfo?.lastModified }}</div>
-    </div>
-  </n-popover>
+      <div class="max-w-64">
+        <div>{{ popInfo?.name }}</div>
+        <div>项目类型：{{ popInfo?.type }}</div>
+        <div>分辨率：{{ popInfo?.width }} × {{ popInfo?.height }}</div>
+        <div>大小：{{ popInfo?.size }}</div>
+        <div>修改时间：{{ popInfo?.lastModified }}</div>
+      </div>
+    </n-popover>
+  </div>
 </template>
 
 <style scoped></style>

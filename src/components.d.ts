@@ -31,6 +31,7 @@ declare module 'vue' {
     FileContent: typeof import('./components/file-card/FileContent.vue')['default']
     Greet: typeof import('./components/Greet.vue')['default']
     Header: typeof import('./components/layout/header.vue')['default']
+    Image: typeof import('./components/Image.vue')['default']
     ImagePreview: typeof import('./components/image-preview/index.vue')['default']
     Layout: typeof import('./components/layout/index.vue')['default']
     Logo: typeof import('./components/icon/Logo.vue')['default']

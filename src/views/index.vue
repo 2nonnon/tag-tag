@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { renameFile } from '@tauri-apps/api/fs'
 import { useDataStore } from '@/store/data'
 import FileCard from '@/components/file-card/FileCard.vue'
 
@@ -49,16 +50,31 @@ const options = [
   },
 ]
 
+async function rename(path: string) {
+  console.log(path)
+  await renameFile(path, 'E:\\qianDuan\\0\\wallpaper\\test222_mirur_p_20wwwwwwwwwwwwwwwww8498280649qw8031351_1_2084982806498031351jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjqwejjqwejjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj.jpg')
+  updateFiles()
+}
+
+const contextPath = ref('')
 const showDropdown = ref(false)
 const x = ref(0)
 const y = ref(0)
 
-function handleSelect(_key: string) {
+function handleSelect(key: string) {
   showDropdown.value = false
+
+  switch (key) {
+    case 'rename': rename(contextPath.value)
+      break
+    case 'detail':
+      break
+  }
 }
 
-function handleContextMenu(e: MouseEvent) {
+function handleContextMenu(e: MouseEvent, path: string) {
   e.preventDefault()
+  contextPath.value = path
   showDropdown.value = false
   nextTick().then(() => {
     showDropdown.value = true
@@ -82,9 +98,12 @@ function onClickoutside() {
       </div>
     </div>
     <div class="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-x-6 gap-y-8 px-10 pt-4 pb-8">
-      <FileCard v-for="item in files" :key="item.path" :name="item.name!" :src="item.url" :checked="checkedFiles.includes(item.path)" @click="handleCheckFile(item.path)" @contextmenu="handleContextMenu">
+      <FileCard v-for="item in files" :key="item.path" :name="item.name!" :src="item.url" :checked="checkedFiles.includes(item.path)" @click="handleCheckFile(item.path)" @contextmenu="handleContextMenu($event, item.path)">
         <template #default="{ loading, error, info }">
-          <FileContent :name="item.name!" :src="info?.src" :loading="loading" :error="error" />
+          <Image :name="item.name!" :src="info?.src" :loading="loading" :error="error" />
+          <div class="text-ellipsis font-bold line-clamp-4 [line-break:anywhere]">
+            {{ item.name! }}
+          </div>
         </template>
       </FileCard>
     </div>

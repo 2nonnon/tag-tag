@@ -20,9 +20,6 @@ defineProps<Props>()
       </div>
       <img v-else class="h-full w-full object-cover" :src="src" :alt="name">
     </div>
-    <div class="text-ellipsis font-bold line-clamp-2 [line-break:anywhere]">
-      {{ name }}
-    </div>
   </div>
 </template>
 
