@@ -1,11 +1,21 @@
 <script setup lang="ts">
+import { renameFile } from '@tauri-apps/api/fs'
+import EditText from './EditText.vue'
 import { parseSize, parseTime, parseType } from './helper'
 import { setup } from './setup'
 import { createWorker } from '@/utils/worker'
 
+const props = defineProps<{
+  path: string
+  name: string
+  url: string
+  checked?: boolean
+}>()
+
 interface ImageInfo {
   path: string
   src: string
+  url: string
   name: string
   size: number
   width: number
@@ -14,12 +24,6 @@ interface ImageInfo {
   blob: Blob
   type: string
 }
-
-const props = defineProps<{
-  name: string
-  src: string
-  checked?: boolean
-}>()
 
 const info = shallowRef<ImageInfo | null>(null)
 
@@ -49,13 +53,14 @@ const { stop } = useIntersectionObserver(
       stop()
 
       const worker = createWorker(setup)
-      worker.postMessage({ src: props.src, name: props.name })
+      worker.postMessage({ src: props.url, name: props.name })
       worker.onmessage = (e: { data: Omit<ImageInfo, 'path' | 'src'> }) => {
         const data = e.data
         const url = URL.createObjectURL(data.blob)
         info.value = {
           ...data,
-          path: props.src,
+          path: props.path,
+          url: props.url,
           src: url,
         }
         loading.value = false
@@ -69,15 +74,84 @@ const { stop } = useIntersectionObserver(
     }
   },
 )
+
+const options = [
+  {
+    label: '重命名',
+    key: 'rename',
+  },
+  {
+    label: '查看详情',
+    key: 'detail',
+  },
+]
+
+const contextPath = ref('')
+const showDropdown = ref(false)
+const x = ref(0)
+const y = ref(0)
+
+const editing = ref(false)
+
+async function rename(name: string) {
+  const segments = contextPath.value.split('\\')
+
+  const dirname = segments.slice(0, -1).join('\\')
+  const filename = segments[segments.length - 1]
+
+  try {
+    if (name !== filename) {
+      const path = `${dirname}\\${name}`
+      await renameFile(contextPath.value, path)
+
+      info.value = {
+        ...info.value!,
+        path,
+        name,
+      }
+    }
+  }
+  catch (e) {
+
+  }
+  finally {
+    editing.value = false
+  }
+}
+
+function handleSelect(key: string) {
+  showDropdown.value = false
+
+  switch (key) {
+    case 'rename': editing.value = true
+      break
+    case 'detail':
+      break
+  }
+}
+
+async function handleContextMenu(e: MouseEvent, path: string) {
+  contextPath.value = path
+  showDropdown.value = false
+  await nextTick()
+  showDropdown.value = true
+  x.value = e.clientX
+  y.value = e.clientY
+}
+
+function onClickoutside() {
+  showDropdown.value = false
+}
 </script>
 
 <template>
-  <div>
-    <n-popover trigger="hover" :disabled="!popInfo" :delay="1000">
+  <div @contextmenu.prevent="handleContextMenu($event, info?.path || props.path)">
+    <n-popover trigger="hover" :disabled="!popInfo || editing" :delay="1000">
       <template #trigger>
-        <div ref="targetRef" class="p-2 rounded-xl transition hover:bg-accent" :class="{ '!bg-accent-foreground': checked }">
+        <n-el ref="targetRef" class="p-2 rounded-xl transition hover:bg-[--button-color-2-hover]" :class="{ '!bg-[color(from_var(--primary-color-hover)_srgb_r_g_b_/_0.5)]': checked }">
           <slot :loading="loading" :error="error" :info="info" />
-        </div>
+          <EditText :value="info?.name || name" :editing="editing" @update:value="rename" />
+        </n-el>
       </template>
 
       <div class="max-w-64">
@@ -88,6 +162,19 @@ const { stop } = useIntersectionObserver(
         <div>修改时间：{{ popInfo?.lastModified }}</div>
       </div>
     </n-popover>
+
+    <div v-if="showDropdown" class="fixed inset-0 z-0" />
+
+    <n-dropdown
+      placement="bottom-start"
+      trigger="manual"
+      :x="x"
+      :y="y"
+      :options="options"
+      :show="showDropdown"
+      :on-clickoutside="onClickoutside"
+      @select="handleSelect"
+    />
   </div>
 </template>
 
