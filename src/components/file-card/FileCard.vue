@@ -3,6 +3,7 @@ import { renameFile } from '@tauri-apps/api/fs'
 import EditText from './EditText.vue'
 import { parseSize, parseTime, parseType } from './helper'
 import { setup } from './setup'
+import { removeTagFromName } from './tag'
 import { createWorker } from '@/utils/worker'
 
 const props = defineProps<{
@@ -32,7 +33,7 @@ const popInfo = computed(() => {
     return null
 
   return {
-    name: info.value.name,
+    name: removeTagFromName(info.value.name),
     type: parseType(info.value.type),
     size: parseSize(info.value.size),
     width: info.value.width,
@@ -81,7 +82,7 @@ const options = [
     key: 'rename',
   },
   {
-    label: '查看详情',
+    label: '标签管理',
     key: 'detail',
   },
 ]
@@ -92,6 +93,7 @@ const x = ref(0)
 const y = ref(0)
 
 const editing = ref(false)
+const message = useMessage()
 
 async function rename(name: string) {
   const segments = contextPath.value.split('\\')
@@ -112,7 +114,7 @@ async function rename(name: string) {
     }
   }
   catch (e) {
-
+    message.error('重命名失败')
   }
   finally {
     editing.value = false

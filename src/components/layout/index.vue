@@ -14,7 +14,7 @@ const { isMaximized } = storeToRefs(useStateStore())
 </script>
 
 <template>
-  <n-el class="overflow-hidden border border-[--tag-color] flex absolute inset-0" :class="{ 'rounded-lg': !isMaximized }">
+  <n-el class="overflow-hidden border border-[--tag-color] flex absolute inset-0 select-none" :class="{ 'rounded-lg': !isMaximized }">
     <Aside />
 
     <n-layout content-class="h-full flex flex-col">
