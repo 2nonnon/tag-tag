@@ -7,6 +7,7 @@ const WindowExposed = defineComponent({
     window.$message = useMessage()
     window.$loading = useLoadingBar()
     window.$drawer = useDrawer()
+    window.$modal = useModal()
   },
   render() {
     return null
@@ -16,15 +17,17 @@ const WindowExposed = defineComponent({
 
 <template>
   <n-loading-bar-provider>
-    <n-dialog-provider>
-      <n-notification-provider>
-        <n-message-provider>
-          <drawer-provider>
-            <WindowExposed />
-            <slot />
-          </drawer-provider>
-        </n-message-provider>
-      </n-notification-provider>
-    </n-dialog-provider>
+    <n-modal-provider>
+      <n-dialog-provider>
+        <n-notification-provider>
+          <n-message-provider>
+            <drawer-provider>
+              <WindowExposed />
+              <slot />
+            </drawer-provider>
+          </n-message-provider>
+        </n-notification-provider>
+      </n-dialog-provider>
+    </n-modal-provider>
   </n-loading-bar-provider>
 </template>

@@ -195,6 +195,7 @@ declare global {
   const useMemory: typeof import('@vueuse/core')['useMemory']
   const useMergedState: typeof import('./composables/useMergedState')['default']
   const useMessage: typeof import('naive-ui')['useMessage']
+  const useModal: typeof import('naive-ui')['useModal']
   const useMounted: typeof import('@vueuse/core')['useMounted']
   const useMouse: typeof import('@vueuse/core')['useMouse']
   const useMouseInElement: typeof import('@vueuse/core')['useMouseInElement']
@@ -492,6 +493,7 @@ declare module 'vue' {
     readonly useMemory: UnwrapRef<typeof import('@vueuse/core')['useMemory']>
     readonly useMergedState: UnwrapRef<typeof import('./composables/useMergedState')['default']>
     readonly useMessage: UnwrapRef<typeof import('naive-ui')['useMessage']>
+    readonly useModal: UnwrapRef<typeof import('naive-ui')['useModal']>
     readonly useMounted: UnwrapRef<typeof import('@vueuse/core')['useMounted']>
     readonly useMouse: UnwrapRef<typeof import('@vueuse/core')['useMouse']>
     readonly useMouseInElement: UnwrapRef<typeof import('@vueuse/core')['useMouseInElement']>
@@ -782,6 +784,7 @@ declare module '@vue/runtime-core' {
     readonly useMemory: UnwrapRef<typeof import('@vueuse/core')['useMemory']>
     readonly useMergedState: UnwrapRef<typeof import('./composables/useMergedState')['default']>
     readonly useMessage: UnwrapRef<typeof import('naive-ui')['useMessage']>
+    readonly useModal: UnwrapRef<typeof import('naive-ui')['useModal']>
     readonly useMounted: UnwrapRef<typeof import('@vueuse/core')['useMounted']>
     readonly useMouse: UnwrapRef<typeof import('@vueuse/core')['useMouse']>
     readonly useMouseInElement: UnwrapRef<typeof import('@vueuse/core')['useMouseInElement']>

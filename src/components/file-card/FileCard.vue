@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { renameFile } from '@tauri-apps/api/fs'
+import { NButton } from 'naive-ui'
 import EditText from './EditText.vue'
 import { parseSize, parseTime, parseType } from './helper'
 import { setup } from './setup'
@@ -83,11 +84,10 @@ const options = [
   },
   {
     label: '标签管理',
-    key: 'detail',
+    key: 'tag',
   },
 ]
 
-const contextPath = ref('')
 const showDropdown = ref(false)
 const x = ref(0)
 const y = ref(0)
@@ -96,7 +96,9 @@ const editing = ref(false)
 const message = useMessage()
 
 async function rename(name: string) {
-  const segments = contextPath.value.split('\\')
+  const currentPath = info.value?.path || props.path
+
+  const segments = currentPath.split('\\')
 
   const dirname = segments.slice(0, -1).join('\\')
   const filename = segments[segments.length - 1]
@@ -104,7 +106,7 @@ async function rename(name: string) {
   try {
     if (name !== filename) {
       const path = `${dirname}\\${name}`
-      await renameFile(contextPath.value, path)
+      await renameFile(currentPath, path)
 
       info.value = {
         ...info.value!,
@@ -114,11 +116,33 @@ async function rename(name: string) {
     }
   }
   catch (e) {
-    message.error('重命名失败')
+    message.error('修改失败')
   }
   finally {
     editing.value = false
   }
+}
+
+const modal = useModal()
+
+async function editTag() {
+  const m = modal.create({
+    preset: 'card',
+    closable: false,
+    closeOnEsc: false,
+    content() {
+      return h('div', {}, [
+        h('div', { class: '' }, h('img', { src: props.url })),
+        h('div', {}, [
+          h('div', {}, []),
+          h('div', {}, [
+            h(NButton, { onClick: () => m.destroy() }, () => '取消'),
+            h(NButton, { type: 'primary', onClick: () => m.destroy() }, () => '确定'),
+          ]),
+        ]),
+      ])
+    },
+  })
 }
 
 function handleSelect(key: string) {
@@ -127,13 +151,12 @@ function handleSelect(key: string) {
   switch (key) {
     case 'rename': editing.value = true
       break
-    case 'detail':
+    case 'tag': editTag()
       break
   }
 }
 
-async function handleContextMenu(e: MouseEvent, path: string) {
-  contextPath.value = path
+async function handleContextMenu(e: MouseEvent) {
   showDropdown.value = false
   await nextTick()
   showDropdown.value = true
@@ -147,7 +170,7 @@ function onClickoutside() {
 </script>
 
 <template>
-  <div @contextmenu.prevent="handleContextMenu($event, info?.path || props.path)">
+  <div @contextmenu.prevent="handleContextMenu">
     <n-popover trigger="hover" :disabled="!popInfo || editing" :delay="1000">
       <template #trigger>
         <n-el ref="targetRef" class="p-2 rounded-xl transition hover:bg-[--button-color-2-hover]" :class="{ '!bg-[color(from_var(--primary-color-hover)_srgb_r_g_b_/_0.5)]': checked }">

@@ -40,6 +40,7 @@ export default defineConfig(async () => ({
             'useMessage',
             'useNotification',
             'useLoadingBar',
+            'useModal',
           ],
           'lucide-vue-next': [],
         },
