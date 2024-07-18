@@ -10,7 +10,7 @@ export function getTagFromName(name: string) {
   }
 
   const arr = name.split('---')
-  return arr[1].split('.')[0].split('-')
+  return arr[1].split('.')[0].split('_')
 }
 
 export function removeTagFromName(name: string) {
@@ -31,5 +31,5 @@ export function addTagToName(name: string, tags: string[]) {
 
   const arr = $name.split('.')
 
-  return `${arr[0]}---${tags.join('-')}.${arr[1]}`
+  return `${arr[0]}---${tags.join('_')}.${arr[1]}`
 }

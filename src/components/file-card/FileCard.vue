@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { renameFile } from '@tauri-apps/api/fs'
-import { NButton } from 'naive-ui'
 import EditText from './EditText.vue'
 import { parseSize, parseTime, parseType } from './helper'
 import { setup } from './setup'
-import { removeTagFromName } from './tag'
+import { addTagToName, getTagFromName, removeTagFromName } from './tag'
+import EditTag from './EditTag.vue'
 import { createWorker } from '@/utils/worker'
 
 const props = defineProps<{
@@ -123,6 +123,11 @@ async function rename(name: string) {
   }
 }
 
+async function handleUpdateValue(name: string) {
+  const fullname = addTagToName(name, getTagFromName(info.value!.name))
+  rename(fullname)
+}
+
 const modal = useModal()
 
 async function editTag() {
@@ -130,17 +135,13 @@ async function editTag() {
     preset: 'card',
     closable: false,
     closeOnEsc: false,
+    class: 'max-w-[80vw]',
+    contentClass: '!p-3',
     content() {
-      return h('div', {}, [
-        h('div', { class: '' }, h('img', { src: props.url })),
-        h('div', {}, [
-          h('div', {}, []),
-          h('div', {}, [
-            h(NButton, { onClick: () => m.destroy() }, () => '取消'),
-            h(NButton, { type: 'primary', onClick: () => m.destroy() }, () => '确定'),
-          ]),
-        ]),
-      ])
+      return h(EditTag, { url: info.value!.url, name: info.value!.name, onCancel: () => m.destroy(), onConfirm: async (name: string) => {
+        await rename(name)
+        m.destroy()
+      } })
     },
   })
 }
@@ -175,7 +176,7 @@ function onClickoutside() {
       <template #trigger>
         <n-el ref="targetRef" class="p-2 rounded-xl transition hover:bg-[--button-color-2-hover]" :class="{ '!bg-[color(from_var(--primary-color-hover)_srgb_r_g_b_/_0.5)]': checked }">
           <slot :loading="loading" :error="error" :info="info" />
-          <EditText :value="info?.name || name" :editing="editing" @update:value="rename" />
+          <EditText :value="removeTagFromName(info?.name || name)" :editing="editing" @update:value="handleUpdateValue" />
         </n-el>
       </template>
 
